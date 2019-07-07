@@ -1,0 +1,29 @@
+{% if exists('auth/base') %}
+    {% extends 'auth/base.html' %}
+{% else %}
+    {% extends 'base.html' %}
+{% endif %}
+
+{% block css %}
+<!-- Application CSS -->
+<link href="/static/style.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block title %} 
+    List of PDF | {{ config('application.name', 'Masonite none') }} 
+{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <div class="title m-b-md">
+        {{ config('application.name') }}
+    </div>
+    <h2>Upload PDF</h2>
+    <form action="store" method="post" enctype="multipart/form-data">
+        {{ csrf_field }}
+        <input type="file" name="pdf_file" id="pdf_file">
+        <br>
+        <button type="submit" class="btn btn-success">Upload</button>
+    </form>
+</div>
+{% endblock %}

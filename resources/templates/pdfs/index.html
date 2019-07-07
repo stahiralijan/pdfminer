@@ -1,0 +1,43 @@
+{% if exists('auth/base') %}
+    {% extends 'auth/base.html' %}
+{% else %}
+    {% extends 'base.html' %}
+{% endif %}
+
+{% block css %}
+<!-- Application CSS -->
+<link href="/static/style.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block title %} 
+    List of PDF | {{ config('application.name', 'Masonite none') }} 
+{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <div class="title m-b-md">
+        {{ config('application.name') }}
+    </div>
+    
+    <a href="create" class="btn btn-success">Upload PDF</a>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>PDF File name</th>
+                <th>PDF file</th>
+                <th>TXT file</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for pdf in pdfs
+                <tr>
+                    <td>{{ pdf.name }}</td>
+                    <td><a href="/static/pdf_files/{{ pdf.pdf_path }}" target="_blank">Download PDF</a></td>
+                    <td><a href="/static/pdf_files/{{ pdf.txt_path }}" target="_blank">Download TXT</a></td>
+                </tr>
+            @endfor
+        </tbody>
+    </table>
+</div>
+{% endblock %}
